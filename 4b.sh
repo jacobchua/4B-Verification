@@ -288,11 +288,12 @@ else
 fi
 
 
-printf "\e[0m List of valid terminals that may be logged in directly as root \n "
-printf "\033[33;31m Please remove entries for any consoles that are not in a physically secure location \n"
-cat /etc/securetty
-	
-
+printf "\e[0m Determin if restriction of login to system console is configured correctly \n "
+if ls -ld /etc/securetty| cut -d " " -f 5 | grep 0; then
+	printf "\033[33;32m PASS \n"
+else
+	printf "\033[33;31m FAIL \n"
+fi
 
 printf "\e[0m \n Restrict Access to the su command \n "
 
@@ -301,6 +302,7 @@ if cat /etc/pam.d/su | grep "^auth		required	pam_wheel.so use_uid" > /dev/null; 
 else
 	printf "\033[33;31m FAIL \n"
 fi
+
 printf "\e[0m Users that are allowed to issue su command: \n "
 echo -en "\033[33;31m" > /dev/null
 cat /etc/group | grep wheel | cut -d : -f 4 #Grep "wheel" from /etc/group and cut out the 4th field 
