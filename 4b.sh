@@ -3,7 +3,7 @@
 #9
 clear
 printf "Checking if Anacron is enabled \n"
-if rpm -q cronie-anacron | grep "not installed" ; then # Check if anacron is installed or not
+if rpm -q cronie-anacron | grep "not installed" >/dev/null ; then # Check if anacron is installed or not
 	printf "\033[33;32m FAIL \n"
 else
 	printf "\033[33;31m PASS \n"
