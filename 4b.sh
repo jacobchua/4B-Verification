@@ -3,10 +3,10 @@
 #9
 clear
 printf "Checking if Anacron is enabled \n"
-if rpm -qa | grep -q cronie-anacron; then # List enabled softwares and grep "cronie-anacron" to check if it is enabled
-	printf "\033[33;32m PASS \n"
+if rpm -q cronie-anacron | grep "not installed" ; then # List enabled softwares and grep "cronie-anacron" to check if it is installed
+	printf "\033[33;32m FAIL \n"
 else
-	printf "\033[33;31m FAIL \n"
+	printf "\033[33;31m PASS \n"
 fi
 
 printf "\e[0m Checking if Cron is enabled \n"
